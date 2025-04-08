@@ -83,14 +83,14 @@ $result = $conn->query($sql);
                                 <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
                                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($row['name']) ?>">
                                 <input type="hidden" name="product_price" value="<?= htmlspecialchars($discountedPrice) ?>">
-                                <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;">
+                                <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;" class="form-control text-center me-3">
                                 <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
                             </form>
                             </div>
                         </div>
                     </div>
                         <?php else: ?>
-                            <div class="col mb-5" style="cursor: pointer;" onclick="window.location.href='item.php/<?= $row['id']; ?>'">
+                            <div class="col mb-5" style="cursor: pointer;" onclick="window.location.href='item.php?id=<?= $row['id']; ?>'">
                                 <div class="card h-100">
                                 <!-- Product image-->
                                 <img class="card-img-top" src="<?= htmlspecialchars($row['picture']) ?>" alt="..." />
@@ -108,8 +108,8 @@ $result = $conn->query($sql);
                             <form action="backend/addcart.php" method="POST">
                                 <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
                                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($row['name']) ?>">
-                                <input type="hidden" name="product_price" value="<?= htmlspecialchars($discountedPrice) ?>">
-                                <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;">
+                                <input type="hidden" name="product_price" value="<?= htmlspecialchars($row['price']) ?>">
+                                <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;" class="form-control text-center me-3">
                                 <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
                             </form>
                             </div>

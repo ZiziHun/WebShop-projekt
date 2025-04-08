@@ -70,11 +70,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                         </div>
                                         <p class="lead"><u>Termék leírása:</u><br><?= htmlspecialchars($row['description']) ?></p>
                                         <div class="d-flex">
-                                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                                <i class="bi-cart-fill me-1"></i>
-                                                Kosárhoz adom!
-                                            </button>
+                                        <form action="backend/addcart.php" method="POST">
+                                            <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
+                                            <input type="hidden" name="product_name" value="<?= htmlspecialchars($row['name']) ?>">
+                                            <input type="hidden" name="product_price" value="<?= htmlspecialchars($discountedPrice) ?>">
+                                            <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;" class="form-control text-center me-3">
+                                            <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
+                                        </form>
                                         </div>
                                     </div>
                                 </div>
@@ -93,11 +95,13 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                         </div>
                                         <p class="lead"><u>Termék leírása:</u><br><?= htmlspecialchars($row['description']) ?></p>
                                         <div class="d-flex">
-                                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                                <i class="bi-cart-fill me-1"></i>
-                                                Kosárhoz adom!
-                                            </button>
+                                        <form action="backend/addcart.php" method="POST">
+                                            <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
+                                            <input type="hidden" name="product_name" value="<?= htmlspecialchars($row['name']) ?>">
+                                            <input type="hidden" name="product_price" value="<?= htmlspecialchars($row['price']) ?>">
+                                            <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;" class="form-control text-center me-3">
+                                            <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
+                                        </form>
                                         </div>
                                     </div>
                                 </div>
