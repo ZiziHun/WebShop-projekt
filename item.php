@@ -1,5 +1,6 @@
 <?php
 require 'backend/db.php';
+session_start();
 
 // Az id lekérése az URL-ből
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
@@ -38,15 +39,17 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="index.php">Főoldal</a></li>
                         <li class="nav-item"><a class="nav-link active" href="items.php">Termékek</a></li>
-                        <li class="nav-item"><a class="nav-link" aria-current="page" href="contact.html">Kapcsolat</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="contact.php">Kapcsolat</a></li>
                     </ul>
-                    <form class="d-flex">
-                        <a href="cart.html"><button class="btn btn-outline-dark">
+                    <a href="cart.php">
+                        <button class="btn btn-outline-dark">
                             <i class="bi-cart-fill me-1"></i>
                             Kosár 
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        </button></a>
-                    </form>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                <?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>
+                            </span>
+                        </button>
+                    </a>
                 </div>
             </div>
         </nav>
