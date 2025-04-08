@@ -63,7 +63,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                     <div class="col-md-6">
                                         <div class="small mb-1">Azonosító: <?=htmlspecialchars($row['id'])?></div>
                                         <h1 class="display-5 fw-bolder"><?=htmlspecialchars($row['name'])?></h1>
-                                        <div class="fs-5 mb-5">
+                                        <p class="lead"><u>Kedvezmény:</u> <?= htmlspecialchars($row['discount']) ?>%</p>
+                                    
+                                        <div class="fs-5 mb-5 lead">
                                             <span class="text-decoration-line-through"><?=htmlspecialchars($row['price'])?> Ft</span>
                                             <?php $discountedPrice = $row['price'] - ($row['price'] * ($row['discount'] / 100)); ?>
                                             <span><?= htmlspecialchars($discountedPrice) ?> Ft</span>
@@ -122,11 +124,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <script>
-$(document).ready(function(){
-  $('[data-toggle="tooltip"]').tooltip();
-});
-</script>
     </body>
 </html>
 
