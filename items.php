@@ -65,9 +65,7 @@ $result2 = $conn->query($sql2);
                      <?php endwhile; ?>
                 <?php else: ?>
                     <p>Nincs megjeleníthető kateógira.</p>
-                <?php endif; ?>
-
-                <?php $conn->close(); ?>                
+                <?php endif; ?>             
                 </div>
             </div>
         </div>    
