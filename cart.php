@@ -1,25 +1,5 @@
 <?php
 session_start();
-
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])):
-    echo '<h2>Kosár tartalma</h2>';
-    echo '<ul>';
-    foreach ($_SESSION['cart'] as $product_id => $product) {
-        echo '<li>';
-        echo 'Termék: ' . htmlspecialchars($product['name']) . '<br>';
-        echo 'Ár: ' . htmlspecialchars($product['price']) . ' Ft<br>';
-        echo 'Mennyiség: ' . htmlspecialchars($product['quantity']) . '<br>';
-        echo 'Összesen: ' . htmlspecialchars($product['price'] * $product['quantity']) . ' Ft<br>';
-        echo '<form action="backend/removecart.php" method="POST" style="display:inline;">';
-        echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
-        echo '<button type="submit" class="btn btn-danger">Törlés</button>';
-        echo '</form>';
-        echo '</li>';
-    }
-    echo '</ul>';
-else:
-    echo 'A kosár üres.';
-endif;
 ?>
 
 
@@ -64,17 +44,57 @@ endif;
         </nav>
         <!-- Product section-->
         <section class="py-5">
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://preview.redd.it/h%C3%ADz%C3%B3-olcs%C3%B3n-v0-tu89nd5uk1ib1.png?auto=webp&s=61754f46b54baacd102644c2be9c619c5302f300" alt="dummy pic" /></div>
-                    <div class="col-md-6">
-                        <div class="small mb-1">PC Alkatrészek kellenek?</div>
-                        <h1 class="display-5 fw-bolder">Bingusz!</h1>
-                        <p class="lead">Már 2025 óta piacon, töretlenül!<br>Készült egy IKT Projekt keretein belül.</p>
-                    </div>
-                </div>
+    <div class="container px-4 px-lg-5 my-5">
+        <h2 class="mb-4">Kosár tartalma</h2>
+        <ul class="list-group mb-4">
+            <?php
+            $total = 0;
+
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])):
+                foreach ($_SESSION['cart'] as $product_id => $product) {
+                    $subtotal = $product['price'] * $product['quantity'];
+                    $total += $subtotal;
+
+                    echo '<li class="list-group-item">';
+                    echo '<div class="d-flex align-items-start">';
+
+                    echo '<img src="' . htmlspecialchars($product['picture']) . '" alt="' . htmlspecialchars($product['name']) . '" class="me-3 rounded" style="width: 80px; height: auto;">';
+
+                    echo '<div>';
+                    echo '<strong>Termék:</strong> ' . htmlspecialchars($product['name']) . '<br>';
+                    echo '<strong>Ár:</strong> ' . htmlspecialchars($product['price']) . ' Ft<br>';                    
+                    echo '<strong>Mennyiség:</strong> ' . htmlspecialchars($product['quantity']) . '<br>';
+                    echo '<strong>Összesen:</strong> ' . $subtotal . ' Ft<br>';
+
+                    echo '<form action="backend/removecart.php" method="POST" style="display:inline;">';
+                    echo '<input type="hidden" name="product_id" value="' . $product_id . '">';
+                    echo '<button type="submit" class="btn btn-sm btn-danger mt-2">Törlés</button>';
+                    echo '</form>';
+
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</li>';
+                }
+            else:
+                echo '<li class="list-group-item">A kosár üres</li>';
+            endif;
+            ?>
+        </ul>
+
+        <?php if ($total > 0): ?>
+            <div class="text-end">
+                <h4>Végösszeg: <strong><?= $total ?> Ft</strong></h4>
+                <a href="#" class="btn btn-success mt-3">Tovább a fizetéshez</a>
             </div>
-        </section>
+        <?php else: ?> 
+            <div class="text-end">
+                <h4>Végösszeg: <strong>0 Ft</strong></h4>
+                <a href="#" class="btn btn-success mt-3" disabled>Tovább a fizetéshez</a>
+            </div>
+        <?php endif; ?>
+    </div>
+</section>
+
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Bingusz Shop!</p></div>
         </footer>

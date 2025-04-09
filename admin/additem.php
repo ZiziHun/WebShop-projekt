@@ -16,8 +16,8 @@ $result = $conn->query($sql);
         <input type="text" name="name" placeholder="Termék neve" required><br><br>
         <input type="text" name="description" placeholder="Termék leírása" required><br><br>
         <input type="number" name="price" placeholder="Termék ára" required><br><br>
-        <input type="text" name="picture" placeholder="Termék képe"><br><br>
-        <input type="number" name="discount" placeholder="Leárazás (%)" max="99" required><br><br>
+        <input type="text" name="picture" placeholder="Termék képe (direct link)"><br><br>
+        <input type="number" name="discount" placeholder="Leárazás (%)" min="0" max="99" required><br><br>
         <label for="category">Kategória: </label>
         <select id="category" name="category">
           <?php if ($result && $result->num_rows > 0): ?>

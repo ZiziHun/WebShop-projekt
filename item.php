@@ -76,8 +76,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                             <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
                                             <input type="hidden" name="product_name" value="<?= htmlspecialchars($row['name']) ?>">
                                             <input type="hidden" name="product_price" value="<?= htmlspecialchars(round($discountedPrice)) ?>">
-                                            <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;" class="form-control text-center me-3">
-                                            <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
+                                            <input type="hidden" name="product_picture" value="<?= htmlspecialchars($row['picture']) ?>">
+                                            <div class="justify-content-center text-center align-items-center d-flex">
+                                                <input type="number" name="quantity" value="1" min="1" style="max-width: 3rem;" class="form-control text-center me-3">
+                                                <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
+                                            </div>
                                         </form>
                                         </div>
                                     </div>
@@ -101,8 +104,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                             <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
                                             <input type="hidden" name="product_name" value="<?= htmlspecialchars($row['name']) ?>">
                                             <input type="hidden" name="product_price" value="<?= htmlspecialchars($row['price']) ?>">
-                                            <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;" class="form-control text-center me-3">
-                                            <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
+                                            <div class="justify-content-center text-center align-items-center d-flex">
+                                                <input type="number" name="quantity" value="1" min="1" style="max-width: 3rem;" class="form-control text-center me-3">
+                                                <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
+                                            </div>
                                         </form>
                                         </div>
                                     </div>

@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
     $product_name = $_POST['product_name'];
     $product_price = $_POST['product_price'];
     $quantity = $_POST['quantity'];
+    $picture = $_POST['product_picture'];
 
     // Ha a kosár még nem létezik, létrehozzuk
     if (!isset($_SESSION['cart'])) {
@@ -22,7 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
         $_SESSION['cart'][$product_id] = array(
             'name' => $product_name,
             'price' => $product_price,
-            'quantity' => $quantity
+            'quantity' => $quantity,
+            'picture' => $picture
         );
     }
 }
