@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $conn->real_escape_string($_POST['name']);
     $description = $conn->real_escape_string($_POST['description']);
     $price = $conn->real_escape_string($_POST['price']);
-    $picture = isset($_POST['picture']) && !empty($_POST['picture']) ? $conn->real_escape_string($_POST['picture']) : 'dummy';
+    $picture = isset($_POST['picture']) && !empty($_POST['picture']) ? $conn->real_escape_string($_POST['picture']) : 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg';
     $discount = $conn->real_escape_string($_POST['discount']);
 
     $sql = "INSERT INTO items (name, description, price, picture, discount) VALUES ('$name', '$description', '$price', '$picture', '$discount')";
