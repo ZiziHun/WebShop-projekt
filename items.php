@@ -4,6 +4,9 @@ require 'backend/db.php';
 
 $sql = "SELECT * FROM items";
 $result = $conn->query($sql);
+
+$sql2 = "SELECT * FROM categories";
+$result2 = $conn->query($sql2);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +47,30 @@ $result = $conn->query($sql);
                 </div>
             </div>
         </nav>
-        </nav>        
+        </nav>  
+        <div class="container-fluid">
+    <div class="row flex-nowrap">
+        <div class="col-auto px-0">
+            <div id="sidebar" class="collapse collapse-horizontal show border-end">
+                <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
+                    <h4 class=" mb-4 text-center">Szűrő</h4>                
+                    <?php if ($result2 && $result2->num_rows > 0): ?>
+                    <?php while ($row2 = $result2->fetch_assoc()): ?>                       
+                      <div class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            <?= htmlspecialchars($row2['name']) ?>
+                        </label>
+                    </div>
+                     <?php endwhile; ?>
+                <?php else: ?>
+                    <p>Nincs megjeleníthető kateógira.</p>
+                <?php endif; ?>
+
+                <?php $conn->close(); ?>                
+                </div>
+            </div>
+        </div>    
         <section class="py-5 bg-light">
             <div class="container px-4 px-lg-5 mt-5">
                 <h2 class="fw-bolder mb-4 text-center">Termékek</h2>

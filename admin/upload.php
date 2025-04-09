@@ -8,8 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $conn->real_escape_string($_POST['price']);
     $picture = isset($_POST['picture']) && !empty($_POST['picture']) ? $conn->real_escape_string($_POST['picture']) : 'https://dummyimage.com/450x300/dee2e6/6c757d.jpg';
     $discount = $conn->real_escape_string($_POST['discount']);
+    $category = $conn->real_escape_string($_POST['category']);
 
-    $sql = "INSERT INTO items (name, description, price, picture, discount) VALUES ('$name', '$description', '$price', '$picture', '$discount')";
+    $sql = "INSERT INTO items (name, description, price, picture, discount, category) VALUES ('$name', '$description', '$price', '$picture', '$discount', '$category')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Sikeres mentés!";
