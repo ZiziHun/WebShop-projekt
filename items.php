@@ -74,7 +74,7 @@ $result = $conn->query($sql);
                                     <!-- Product price-->
                                     <span class="text-muted text-decoration-line-through"><?= htmlspecialchars($row['price']) ?></span>
                                     <?php $discountedPrice = $row['price'] - ($row['price'] * ($row['discount'] / 100)); ?>
-                                    <?= htmlspecialchars($discountedPrice) ?> Ft
+                                    <?= htmlspecialchars(round($discountedPrice)) ?> Ft
                                 </div>
                             </div>
                             <!-- Product actions-->
@@ -82,7 +82,7 @@ $result = $conn->query($sql);
                             <form action="backend/addcart.php" method="POST">
                                 <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
                                 <input type="hidden" name="product_name" value="<?= htmlspecialchars($row['name']) ?>">
-                                <input type="hidden" name="product_price" value="<?= htmlspecialchars($discountedPrice) ?>">
+                                <input type="hidden" name="product_price" value="<?= htmlspecialchars(round($discountedPrice)) ?>">
                                 <input type="number" name="quantity" value="1" min="1" style="max-width: 5rem;" class="form-control text-center me-3">
                                 <button type="submit" class="btn btn-outline-dark mt-auto">Kosárhoz adom!</button>
                             </form>

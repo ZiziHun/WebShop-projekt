@@ -48,7 +48,7 @@ session_start(); // A session indítása
                     <div class="col-md-6">
                         <div class="small mb-1">PC Alkatrészek kellenek?</div>
                         <h1 class="display-5 fw-bolder">Bingusz!</h1>
-                        <p class="lead">Már 2025 óta piacon, töretlenül!<br>Készült egy IKT Projekt keretein belül.</p>
+                        <p class="lead">Már 2025 óta piacon, töretlenül!<br>Készült egy IKT Projekt keretein belül.<br>Kapcsolat menüpont.</p>
                     </div>
                 </div>
             </div>
