@@ -7,7 +7,38 @@ $result = $conn->query($sql);
 
 $sql2 = "SELECT * FROM categories";
 $result2 = $conn->query($sql2);
+
+if (isset($_GET['category'])) {
+    $categoryParam = $_GET['category'];
+
+    // Tördeld szét az ID-kat vessző mentén
+    $categoryIds = explode(',', $categoryParam);
+
+    // Szűrd ki a nem számokat (biztonság)
+    $categoryIds = array_filter($categoryIds, function($id) {
+        return is_numeric($id);
+    });
+
+    if (!empty($categoryIds)) {
+        // Escape minden ID-t, majd fűzd össze újra
+        $escapedIds = array_map(function($id) use ($conn) {
+            return (int) $conn->real_escape_string($id);
+        }, $categoryIds);
+
+        // Alakítsd SQL IN listává
+        $inList = implode(',', $escapedIds);
+
+        // Lekérdezés több kategóriára
+        $sql = "SELECT * FROM items WHERE category IN ($inList)";
+        $result = $conn->query($sql);
+    } else {
+        // Nincs érvényes ID
+        $result = false;
+    }
+}   
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -42,7 +73,7 @@ $result2 = $conn->query($sql2);
                             <span class="badge bg-dark text-white ms-1 rounded-pill">
                                 <?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>
                             </span>
-                        </button>
+                        </button>                        
                     </a>
                 </div>
             </div>
@@ -53,19 +84,22 @@ $result2 = $conn->query($sql2);
         <div class="col-auto px-0">
             <div id="sidebar" class="collapse collapse-horizontal show border-end">
                 <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100">
-                    <h4 class=" mb-4 text-center">Szűrő</h4>                
+                    <h4 class=" mb-4 text-center">Szűrő</h4>             
                     <?php if ($result2 && $result2->num_rows > 0): ?>
                     <?php while ($row2 = $result2->fetch_assoc()): ?>                       
-                      <div class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <div class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <input class="form-check-input category-checkbox" type="checkbox" value="<?= htmlspecialchars($row2['id']) ?>" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                             <?= htmlspecialchars($row2['name']) ?>
                         </label>
                     </div>
-                     <?php endwhile; ?>
-                <?php else: ?>
-                    <p>Nincs megjeleníthető kateógira.</p>
-                <?php endif; ?>             
+                    <?php endwhile; ?>
+                    <?php else: ?>
+                        <p>Nincs megjeleníthető kateógira.</p>
+                    <?php endif; ?>  
+                    <div class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar">
+                        <button type="button" id="filterBtn" class="btn btn-primary w-100 mt-3">Szűrés</button>
+                    </div>           
                 </div>
             </div>
         </div>    
@@ -160,6 +194,21 @@ $result2 = $conn->query($sql2);
         <script>
 $(document).ready(function(){
   $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+<script>
+document.getElementById('filterBtn').addEventListener('click', function () {
+    const selected = [];
+    const checkboxes = document.querySelectorAll('.category-checkbox:checked');
+
+    checkboxes.forEach(cb => selected.push(cb.value));
+
+    if (selected.length > 0) {
+        const query = selected.join(',');
+        window.location.href = 'items.php?category=' + encodeURIComponent(query);
+    } else {
+        window.location.href = 'items.php';
+    }
 });
 </script>
     </body>
