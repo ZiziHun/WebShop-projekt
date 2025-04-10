@@ -46,9 +46,9 @@ session_start(); // A session indítása
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://preview.redd.it/h%C3%ADz%C3%B3-olcs%C3%B3n-v0-tu89nd5uk1ib1.png?auto=webp&s=61754f46b54baacd102644c2be9c619c5302f300" alt="dummy pic" /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">PC Alkatrészek kellenek?</div>
-                        <h1 class="display-5 fw-bolder">Bingusz!</h1>
-                        <p class="lead">Már 2025 óta piacon, töretlenül!<br>Készült egy IKT Projekt keretein belül.<br>Kapcsolat menüpont.</p>
+                        <div class="small mb-1">Fel szeretnéd venni velünk a kapcsolatot ?</div>
+                        <h1 class="display-5 fw-bolder">Itt megteheted!</h1>
+                        <p class="lead">Készítette: Vízhányó Balázs, Szabó Ádám.<br>Készült egy GD IKT Projekt keretein belül.</p>
                     </div>
                 </div>
             </div>
