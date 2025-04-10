@@ -2,16 +2,23 @@
 require 'backend/db.php';
 session_start();
 
-// Az id lekérése az URL-ből
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Biztonság: az ID-t biztonságosan kezeljük
     $id = $conn->real_escape_string($id);
 
-    // A felhasználó adatainak lekérdezése az ID alapján
     $sql = "SELECT * FROM items WHERE id = $id";
     $result = $conn->query($sql);
+
+    function convertMarkupToHTML($text) {
+        $text = htmlspecialchars($text);
+        $text = nl2br($text);
+        $text = preg_replace('/\[b\](.*?)\[\/b\]/is', '<strong>$1</strong>', $text);
+        $text = preg_replace('/\[i\](.*?)\[\/i\]/is', '<em>$1</em>', $text);
+        $text = preg_replace('/\[u\](.*?)\[\/u\]/is', '<u>$1</u>', $text);
+        $text = preg_replace('/\[code\](.*?)\[\/code\]/is', '<code>$1</code>', $text);
+        return $text;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -70,7 +77,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                             <?php $discountedPrice = $row['price'] - ($row['price'] * ($row['discount'] / 100)); ?>
                                             <span><?= htmlspecialchars(round($discountedPrice)) ?> Ft</span>
                                         </div>
-                                        <p class="lead"><u>Termék leírása:</u><br><?= htmlspecialchars($row['description']) ?></p>
+                                        <div class="lead">
+                                            <p><u>Termék leírása:</u></p>
+                                            <div>
+                                                <?php echo convertMarkupToHTML($row['description']); ?>
+                                            </div>
+                                        </div>
                                         <div class="d-flex">
                                         <form action="backend/addcart.php" method="POST">
                                             <input type="hidden" name="product_id" value="<?= $row['id'] ?>">
@@ -98,7 +110,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                                         <div class="fs-5 mb-5">
                                             <span><?= htmlspecialchars($row['price']) ?> Ft</span>
                                         </div>
-                                        <p class="lead"><u>Termék leírása:</u><br><?= htmlspecialchars($row['description']) ?></p>
+                                        <div class="lead">
+                                            <p><u>Termék leírása:</u></p>
+                                            <div>
+                                                <?php echo convertMarkupToHTML($row['description']); ?>
+                                            </div>
+                                        </div>
                                         <div class="d-flex">
                                         <form action="backend/addcart.php" method="POST">
                                             <input type="hidden" name="product_id" value="<?= $row['id'] ?>">

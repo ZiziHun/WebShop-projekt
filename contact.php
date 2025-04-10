@@ -49,6 +49,21 @@ session_start(); // A session indítása
                         <div class="small mb-1">Fel szeretnéd venni velünk a kapcsolatot ?</div>
                         <h1 class="display-5 fw-bolder">Itt megteheted!</h1>
                         <p class="lead">Készítette: Vízhányó Balázs, Szabó Ádám.<br>Készült egy GD IKT Projekt keretein belül.</p>
+                        <form action="backend/send_message.php" method="post">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Név</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email cím</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Üzenet</label>
+                                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Küldés</button>
+                        </form>
                     </div>
                 </div>
             </div>

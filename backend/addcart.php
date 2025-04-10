@@ -1,6 +1,5 @@
 <?php
-session_start(); // A session indítása
-
+session_start(); 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
     // A termék ID-jét a gombhoz rendeljük
     $product_id = $_POST['product_id'];
@@ -9,17 +8,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
     $quantity = $_POST['quantity'];
     $picture = $_POST['product_picture'];
 
-    // Ha a kosár még nem létezik, létrehozzuk
     if (!isset($_SESSION['cart'])) {
-        $_SESSION['cart'] = array(); // Kosár tömb
+        $_SESSION['cart'] = array(); 
     }
 
-    // Ellenőrizzük, hogy a termék már benne van-e a kosárban
     if (isset($_SESSION['cart'][$product_id])) {
-        // Ha van, frissítjük a mennyiséget
         $_SESSION['cart'][$product_id]['quantity'] += $quantity;
     } else {
-        // Ha nincs, hozzáadjuk az új terméket
         $_SESSION['cart'][$product_id] = array(
             'name' => $product_name,
             'price' => $product_price,
@@ -29,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
     }
 }
 
-// Visszairányítás a termékoldalra
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 exit;
 ?>

@@ -11,28 +11,19 @@ $result2 = $conn->query($sql2);
 if (isset($_GET['category'])) {
     $categoryParam = $_GET['category'];
 
-    // Tördeld szét az ID-kat vessző mentén
     $categoryIds = explode(',', $categoryParam);
-
-    // Szűrd ki a nem számokat (biztonság)
     $categoryIds = array_filter($categoryIds, function($id) {
         return is_numeric($id);
     });
 
     if (!empty($categoryIds)) {
-        // Escape minden ID-t, majd fűzd össze újra
         $escapedIds = array_map(function($id) use ($conn) {
             return (int) $conn->real_escape_string($id);
         }, $categoryIds);
-
-        // Alakítsd SQL IN listává
         $inList = implode(',', $escapedIds);
-
-        // Lekérdezés több kategóriára
         $sql = "SELECT * FROM items WHERE category IN ($inList)";
         $result = $conn->query($sql);
     } else {
-        // Nincs érvényes ID
         $result = false;
     }
 }   
