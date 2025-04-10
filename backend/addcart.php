@@ -1,7 +1,6 @@
 <?php
 session_start(); 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['product_id'])) {
-    // A termék ID-jét a gombhoz rendeljük
     $product_id = $_POST['product_id'];
     $product_name = $_POST['product_name'];
     $product_price = $_POST['product_price'];
