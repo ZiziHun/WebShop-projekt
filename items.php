@@ -106,7 +106,7 @@ if (isset($_GET['category'])) {
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem"><a data-toggle="tooltip" data-placement="top" title="<?= htmlspecialchars($row['discount']) ?>%">Akció!</a></div>
                             <!-- Product image-->
-                            <img class="card-img-top" src="<?= htmlspecialchars($row['picture']) ?>" alt="..." />
+                            <img class="card-img-top" src="<?= htmlspecialchars($row['picture']) ?>" alt="..."  style="min-height: 290px"/>
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -145,7 +145,7 @@ if (isset($_GET['category'])) {
                             <div class="col mb-5" style="cursor: pointer;" onclick="window.location.href='item.php?id=<?= $row['id']; ?>'">
                                 <div class="card h-100">
                                 <!-- Product image-->
-                                <img class="card-img-top" src="<?= htmlspecialchars($row['picture']) ?>" alt="..." />
+                                <img class="card-img-top" src="<?= htmlspecialchars($row['picture']) ?>" alt="..." style="min-height: 290px"/>
                                 <!-- Product details-->
                                 <div class="card-body p-4">
                                     <div class="text-center">
