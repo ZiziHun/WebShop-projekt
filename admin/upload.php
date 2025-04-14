@@ -2,7 +2,6 @@
 require 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Tegyük fel, hogy a form mezői: nev, email
     $name = $conn->real_escape_string($_POST['name']);
     $description = $conn->real_escape_string($_POST['description']);
     $price = $conn->real_escape_string($_POST['price']);
@@ -11,14 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category = $conn->real_escape_string($_POST['category']);
 
     $sql = "INSERT INTO items (name, description, price, picture, discount, category) VALUES ('$name', '$description', '$price', '$picture', '$discount', '$category')";
-
-    /*if ($conn->query($sql) === TRUE) {
-        echo "Sikeres mentés!";
-    } else {
-        echo "Hiba: " . $conn->error;
-    }
-
-    $conn->close();*/
 }
 ?>
 <!DOCTYPE html>
