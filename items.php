@@ -179,7 +179,8 @@ if (isset($_GET['category'])) {
                 <?php $conn->close(); ?>
                 </div>
             </div>
-        </section>
+          </section>
+        </div>
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Bingusz Shop!</p></div>
